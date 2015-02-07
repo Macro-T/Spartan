@@ -1,0 +1,28 @@
+@import variables
+*
+  @include box-sizing(border-box)
+  padding: 0
+  margin: 0
+
+body
+  font-family: $primaryFont, Arial, sans-serif
+  font-size: 16px
+
+a
+  color: $accentColor
+  text-decoration: none
+  &:hover
+    text-decoration: underline
+
+.left
+  float: left
+  @include clearfix
+
+.rigth
+  float: right
+  @include clearfix
+
+.background--blur
+  background: #efefef
+.hiden
+  @include hide-text

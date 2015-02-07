@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="SpartanD">
+  <head>
+    <title>Spartan Downloader</title>
+    <!-- bower:css -->
+    <link rel="stylesheet" href="./vendor/materialize/bin/materialize.css" />
+    <link rel="stylesheet" href="./vendor/wowjs/css/libs/animate.css" />
+    <!-- endbower -->
+
+    <!-- inject:css -->
+    <link rel="stylesheet" href="css/main.css">
+    <!-- endinject -->
+
+  </head>
+  <body ng-controller="mainController">
+    <div class="navbar-fixed">
+      <ul id="cat-dropdown" class="dropdown-content">
+        <li><a href="#">OS</a></li>
+        <li><a href="#">Crack</a></li>
+        <li class="divider"></li>
+        <li><a href="#">IDE</a></li>
+        <li><a href="#">Seguridad</a></li>
+        <li><a href="#">Diseño</a></li>
+        <li class="divider"></li>
+        <li><a href="#">Utilidades</a></li>
+        <li><a href="#">Otros</a></li>
+      </ul>
+       <nav>
+          <div class="nav-wrapper indigo darken-1">
+            <div class="col s12">
+              <a href="#!" class="brand-logo">Spartan</a>
+              <ul id="navigation" class="right side-nav">
+              <li><i class="mdi-action-account-search left"></i>
+                     <input id="icon_prefix" type="search" class="validate">
+              </li>
+             <!-- Dropdown Trigger -->
+              <li><a class="dropdown-button" href="#" data-activates="cat-dropdown">Categorias<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+             <li><a href="#">
+                <i class="mdi-action-account-circle left"></i>Login
+            </a></li>
+              </ul>
+            </div>
+             <a class="button-collapse" href="#" data-activates="navigation"><i class="mdi-navigation-menu"></i></a>
+          </div>
+        </nav>
+  </div>
+    <div class="container">
+      <div class="row">
+          <div class="col s12 m6 l4">
+                <div ng-repeat="programa in programas" class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                       <img class="activator" src="img/{{ programa.tipo }}.jpg">
+                    </div>
+                    <div class="card-content">
+                      <span class="card-title activator grey-text text-darken-4">{{ programa.nombre }}<i class="mdi-navigation-more-vert right"></i>
+                      </span>
+                      <p>
+                        <a href=".{{ programa.url }}"  class="red-text btn-flat waves-effect waves-ligt"><i class="mdi-file-cloud-download"></i> Descargar</a>
+                      </p>
+                    </div>
+                    <div class="card-reveal grey-text text-darken-3">
+                        <span class="card-title grey-text text-darken-4">{{ programa.nombre }} <i class="mdi-navigation-close right"></i></span>
+                        <p>{{ programa.resumen}}</p>
+                        <div class="section">
+                          <p><i class="mdi-action-label"></i> {{ programa.tipo }}</p>
+                          <div class="divider"></div>
+                          <p><i class="mdi-device-access-time"></i> Subido:{{ programa.fecha | date }}</p>
+                          <div class="divider"></div>
+                          <p><i class="mdi-action-star-rate"></i> {{ programa.rating }} Descargas</p>
+                      </div >
+                    </div>
+              </div>
+          </div>
+
+      </div>
+    </div>
+    <!-- bower:js -->
+    <script src="./vendor/jquery/dist/jquery.js"></script>
+    <script src="./vendor/angular/angular.js"></script>
+    <script src="./vendor/materialize/bin/materialize.js"></script>
+    <script src="./vendor/wowjs/dist/wow.js"></script>
+    <!-- endbower -->
+    <!-- inject:js -->
+    <script src="js/main.js"></script>
+    <script src="js/scripts.js"></script>
+    <!-- endinject -->
+  </body>
+</html>
