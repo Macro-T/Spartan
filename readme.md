@@ -23,6 +23,11 @@ O descargarlo en ZIP
 Usar <code>npm install && bower install</code> para descargar las dependencias
 
 #Algunas cosillas.
-* Estoy utilizadon a Materialize(materializecss.com) como FrameWork FrontEnd y Express(expressjs.org) para el servidor en el Backend
-* Falta algo de Documentacion :(
-* Hay un problema al descargar archivos> E lservidor devuelve un Error 400 Esperamos arreglarlo pronto
+ + Estoy utilizadon a [Materialize] como FrameWork FrontEnd y [Express] para el servidor en el Backend
+ + [Sass] es mi preprocedador de CSS
+ + Falta algo de Documentacion :(
+ + Hay un problema al descargar archivos> E lservidor devuelve un Error 400 Esperamos arreglarlo pronto
+
+[Materialize]: http://materilizecss.com
+[Express]: http://expressjs.com
+[Sass]: http://sass-lang.com
