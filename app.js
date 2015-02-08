@@ -43,11 +43,13 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 app.use(mainRoute);
 // routes ======================================================================
 require('./routes/auth.js')(app, passport); // load our routes and pass in our app and fully configured passport
+app.get('*', function(req, res) {
+        res.sendFile('index.html', { root: path.join(__dirname, '/views') }); // load the single view file (angular will handle the page changes on the front-end)
+});
+
 // Handle 404
 app.use(function(req, res) {
-    res.status(400);
-    console.log('Soy yo Hola');
-    res.sendFile('./views/error.html',{title: '404: File Not Found'});
+   res.status(404).send('Not Found !!!');
 });
 
 // // Handle 500
@@ -60,9 +62,6 @@ app.use(function(error, req, res, next) {
         res.sendFile('./views/error.html',{title: '500: Internal Server Error', error: error });
     }
     next();
-});
-app.get('*', function(req, res) {
-        res.sendFile('index.html', { root: path.join(__dirname, '/views') }); // load the single view file (angular will handle the page changes on the front-end)
 });
 
 module.exports = app;

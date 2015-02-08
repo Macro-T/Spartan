@@ -4,15 +4,16 @@
 
   app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
-    $urlRouterProvider.otherwise('/');
+    //$urlRouterProvider.otherwise('/');
 
     $stateProvider
       .state('home', {
         url:'/',
+        templateUrl: '/templates/main.tpl.html',
         controller:'HomeCtrl'
       })
       .state('category', {
-        url:'/',
+        url:'/category/',
         controller:'CategoryCtrl'
       });
   });
