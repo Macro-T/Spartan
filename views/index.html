@@ -3,6 +3,7 @@
   <head>
     <title>Spartan Downloader</title>
     <!-- bower:css -->
+    <base href="/">
     <link rel="stylesheet" href="./vendor/materialize/bin/materialize.css" />
     <link rel="stylesheet" href="./vendor/wowjs/css/libs/animate.css" />
     <!-- endbower -->
@@ -22,6 +23,7 @@
         <li><a href="#">Seguridad</a></li>
         <li><a href="#">Diseño</a></li>
         <li class="divider"></li>
+        <li><a href="#">Documentos</a></li>
         <li><a href="#">Utilidades</a></li>
         <li><a href="#">Otros</a></li>
       </ul>
@@ -30,7 +32,7 @@
             <div class="col s12">
               <a href="#!" class="brand-logo">Spartan</a>
               <ul id="navigation" class="right side-nav">
-              <li><input id="searchInput" type="search" class="validate" placeholder="Buscar...">
+              <li><input id="searchInput" type="search" ng-model="search.nombre" class="validate" placeholder="Buscar...">
               </li>
              <!-- Dropdown Trigger -->
               <li><a class="dropdown-button" href="#" data-activates="cat-dropdown">Categorias<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
@@ -45,13 +47,13 @@
   </div>
     <div class="container">
       <div class="row">
-          <div class="col s12 m6 l4">
-                <div ng-repeat="programa in programas" class="card">
+          <div ng-repeat="programa in programas | orderBy: fecha | filter: search " class="col s12 m6 l4">
+                <div class="card">
                     <div class="card-image waves-effect waves-block waves-light">
                        <img class="activator" src="img/{{ programa.tipo }}.jpg">
                     </div>
                     <div class="card-content">
-                      <span class="card-title activator grey-text text-darken-4">{{ programa.nombre }}<i class="mdi-navigation-more-vert right"></i>
+                      <span class="card-title activator grey-text text-darken-4">{{ programa.nombre }}<i class="mdi-hardware-keyboard-arrow-up right"></i>
                       </span>
                       <p>
                         <a href=".{{ programa.url }}"  class="red-text btn-flat waves-effect waves-ligt"><i class="mdi-file-cloud-download"></i> Descargar</a>
@@ -80,6 +82,7 @@
     <script src="./vendor/wowjs/dist/wow.js"></script>
     <!-- endbower -->
     <!-- inject:js -->
+    <script src="js/appControllers.js"></script>
     <script src="js/main.js"></script>
     <script src="js/scripts.js"></script>
     <!-- endinject -->

@@ -19,6 +19,34 @@ router.get('/api/programas', function(req, res) {
   });
 });
 
+router.get('/api/programa/:programaId', function(req, res){
+  Programa.findById(req.params.programaId, function(err, programa){
+    if(err){res.send(err); console.log(err);}
+    res.json(programa);
+  });
+});
+
+
+router.delete('/api/programa/:programaId', function(req, res){
+  Programa.remove({_id: req.params.programaId}, function(err, programa){
+    if(err){res.send(err); console.log(err);}
+    res.json({message: 'Borrado Satisfactoriamente'});
+  });
+});
+
+router.put('/api/programas/:programaId', function(req, res){
+  Programa.findById(req.params.programaId, function(err, programa){
+    if(err){res.send(err); console.log('Erro en find: ' + err);}
+    programa.nombre = req.body.nombre;
+    programa.resumen = req.body.resumen;
+    programa.url = req.body.url;
+    programa.descripcion = req.body.descripcion;
+    programa.fecha = req.body.fecha;
+    programa.rating = req.body.rating;
+    programa.tipo = req.body.tipo;
+  });
+});
+
 //Middleware for get the Right Category
 function isRightURL (req, res, next) {
   var rigthURI = req.params.tipo.toString().capitalize();
@@ -54,5 +82,4 @@ router.get('/api/category/:tipo', isRightURL, function(req, res) {
         }
     });
 });
-
 module.exports = router;

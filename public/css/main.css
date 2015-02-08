@@ -10,5 +10,13 @@
 }
 
 .card-reveal > .section > p {
-  font-size: 1.2em;
+  font-size: 1.1 em;
+}
+.card-reveal > .section > p > i {
+  font-size: 1.5 em;
+  vertical-align: middle;
+}
+
+.card-content > span.activator {
+  vertical-align: middle;
 }

@@ -1,17 +1,20 @@
-'use strict';
-var app = angular.module('SpartanD', []);
+(function(){
+  'use strict';
+  var app = angular.module('SpartanD', ['ui.router', 'appControllers']);
 
-function mainController($scope, $http) {
-    $scope.formData = {};
+  app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+    $locationProvider.html5Mode(true);
+    $urlRouterProvider.otherwise('/');
 
-    // when landing on the page, get all todos and show them
-    $http.get('/api/programas')
-        .success(function(data) {
-            $scope.programas = data;
-            console.log(data);
-        })
-        .error(function(data) {
-            console.log('Error: ' + data);
-        });
+    $stateProvider
+      .state('home', {
+        url:'/',
+        controller:'HomeCtrl'
+      })
+      .state('category', {
+        url:'/',
+        controller:'CategoryCtrl'
+      });
+  });
 }
-app.controller('mainController', mainController);
+)();

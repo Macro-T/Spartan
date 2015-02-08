@@ -7,10 +7,10 @@ var programaSchema = new Schema({
   resumen: {type: String},
   url: {type:String},
   descripcion: {type: String},
-  fecha: {type: Date, default: Date.now},
+  fecha: {type: Date, default: Date.now()},
   rating: {type: Number},
   tipo: {type: String, enum: [
-      'Sistema Operativo', 'Crack', 'IDE', 'Seguridad', 'Diseño', 'Utilidades', 'Otros'
+      'Sistema Operativo', 'Crack', 'IDE', 'Seguridad', 'Diseno', 'Utilidades', 'Documento', 'Otros'
     ], default: 'Otros'}
 
 });
