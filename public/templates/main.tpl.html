@@ -1,4 +1,4 @@
-<div ng-repeat="programa in programas | orderBy: fecha | filter: search " class="col s12 m6 l4">
+<div ng-repeat="programa in programas | orderBy: fecha | filter: search " class="col s12 m6 wow fadeInUpBig">
       <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
              <img class="activator" src="img/{{ programa.tipo }}.jpg">
@@ -7,7 +7,7 @@
             <span class="card-title activator grey-text text-darken-4">{{ programa.nombre | limitTo: 16}}<i class="mdi-hardware-keyboard-arrow-up right"></i>
             </span>
             <p>
-              <a href=".{{ programa.url }}"  class="red-text btn-flat waves-effect waves-ligt"><i class="mdi-file-cloud-download"></i> Descargar</a>
+              <a href=".{{ programa.url }}"  class="red darken-2 white-text waves-effect waves-light btn-large"><i class="mdi-file-cloud-download right"></i> Descargar</a>
             </p>
           </div>
           <div class="card-reveal grey-text text-darken-3">
@@ -19,6 +19,8 @@
                 <p><i class="mdi-device-access-time"></i> Subido:{{ programa.fecha | date }}</p>
                 <div class="divider"></div>
                 <strong><i class="mdi-action-star-rate"></i> {{ programa.rating }} Descargas</strong>
+                <div class="divider"></div>
+                <p><a href=".{{ programa.url }}"  class="red darken-2 white-text waves-effect waves-light btn-large"><i class="mdi-file-cloud-download right"></i> Descargar</a></p>
             </div >
           </div>
     </div>

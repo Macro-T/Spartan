@@ -7,11 +7,11 @@ var sassConfig = { style: 'expanded', sourcemap: false, 'sourcemap=none': true }
 //Compilations and Linting
 gulp.task('styles', function(){
  return $.rubySass('./public/sass/', sassConfig)
-      .on('error', function (err) { console.log(err.message); $.notify(err);})
-      // .pipe($.autoprefixer({
-      //           browsers: ['last 2 version'],
-      //           cascade: false
-      //       }))
+      .on('error', function (err) {  $.notify(err); console.log(err.message);})
+      .pipe($.autoprefixer({
+                browsers: ['last 2 version'],
+                cascade: false
+            }))
       .pipe(gulp.dest('./public/css'));
 });
 

@@ -5,6 +5,18 @@
   height: 150%;
 }
 
+@media only screen and (min-width: 601px) {
+  div.row.wow > .col.wow.m6 {
+    margin-bottom: 2.2rem;
+  }
+
+  .card-reveal {
+    font-size: 1.3rem;
+  }
+  .card-reveal > a.btn-large {
+    font-size: 1rem;
+  }
+}
 .btn i, .btn-large i, .btn-floating i, .btn-large i, .btn-flat i {
   vertical-align: middle !important;
 }
