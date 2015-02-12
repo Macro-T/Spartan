@@ -23,6 +23,6 @@
     "nomen": true,
     "maxerr": 50,
     "globals": {
-        "angular": false
+        "angular": true
     }
 }

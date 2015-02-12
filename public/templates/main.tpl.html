@@ -1,13 +1,17 @@
-<div ng-repeat="programa in programas | orderBy: fecha | filter: search " class="col s12 m6 wow fadeInUpBig">
+<div class="valign-wrapper color red col s12 white-text" ng-show="message">
+    <h1>{{ message.error }}</h1>
+</div>
+
+<div ng-repeat="programa in programas | orderBy: programa.rating | filter: search " class="col s12 m6 wow fadeInUpBig">
       <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
              <img class="activator" src="img/{{ programa.tipo }}.jpg">
           </div>
           <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">{{ programa.nombre | limitTo: 16}}<i class="mdi-hardware-keyboard-arrow-up right"></i>
+            <span class="card-title activator grey-text text-darken-4">{{ programa.nombre | limitTo: 16 | capitalize:first}}<i class="mdi-hardware-keyboard-arrow-up right"></i>
             </span>
             <p>
-              <a href=".{{ programa.url }}"  class="red darken-2 white-text waves-effect waves-light btn-large"><i class="mdi-file-cloud-download right"></i> Descargar</a>
+              <a href="/api/programas/download/{{ programa._id }}"  target="_blank" class="red darken-2 white-text waves-effect waves-light btn-large" ng-click="upRatting(programa._id)"><i class="mdi-file-cloud-download right"></i> Descargar</a>
             </p>
           </div>
           <div class="card-reveal grey-text text-darken-3">
@@ -18,9 +22,9 @@
                 <div class="divider"></div>
                 <p><i class="mdi-device-access-time"></i> Subido:{{ programa.fecha | date }}</p>
                 <div class="divider"></div>
-                <strong><i class="mdi-action-star-rate"></i> {{ programa.rating }} Descargas</strong>
+                <p><strong><i class="mdi-action-star-rate"></i> {{ programa.rating }} Descargas</strong></p>
                 <div class="divider"></div>
-                <p><a href=".{{ programa.url }}"  class="red darken-2 white-text waves-effect waves-light btn-large"><i class="mdi-file-cloud-download right"></i> Descargar</a></p>
+                <p><a href="/api/programas/download/{{ programa._id }}"  target="_blank" class="red darken-2 white-text waves-effect waves-light btn-large" ng-click="upRatting(programa._id)"><i class="mdi-file-cloud-download right"></i> Descargar</a></p>
             </div >
           </div>
     </div>

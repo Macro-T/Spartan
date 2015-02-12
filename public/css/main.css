@@ -1,4 +1,17 @@
 /* INDIGO*RED */
+.card::-moz-selection {
+  background-color: #e57373;
+  color: #212121;
+}
+.card::selection {
+  background-color: #e57373;
+  color: #212121;
+}
+.card::-moz-selection {
+  background-color: #e57373;
+  color: #212121;
+}
+
 .nav-wrapper {
   overflow: hidden;
   padding: 0 1rem;
@@ -13,7 +26,7 @@
   .card-reveal {
     font-size: 1.3rem;
   }
-  .card-reveal > a.btn-large {
+  .card-reveal p > a.btn-large {
     font-size: 1rem;
   }
 }
