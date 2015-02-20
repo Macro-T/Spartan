@@ -44,7 +44,7 @@ app.use(mainRoute);
 // routes ======================================================================
 require('./routes/auth.js')(app, passport); // load our routes and pass in our app and fully configured passport
 app.get('*', function(req, res) {
-        res.sendFile('index.html', { root: path.join(__dirname, '/views') }); // load the single view file (angular will handle the page changes on the front-end)
+        res.sendFile('index.html', { root: path.join(__dirname, '/views')}); // load the single view file (angular will handle the page changes on the front-end)
 });
 
 // Handle 404
@@ -55,7 +55,6 @@ app.use(function(req, res) {
 // // Handle 500
 app.use(function(error, req, res, next) {
     if (error.status === 404) {
-      console.log('Soy yo eso es falso');
         res.sendFile('../views/error.html',{title: '404: File Not Found'});
     } else if(res.status === 500) {
         res.status(500);

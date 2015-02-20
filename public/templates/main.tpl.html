@@ -1,8 +1,7 @@
 <div class="valign-wrapper color red col s12 white-text" ng-show="message">
-    <h1>{{ message.error }}</h1>
+    <h1 class="valign center-align">{{ message.error }} {{ category }}</h1>
 </div>
-
-<div ng-repeat="programa in programas | orderBy: programa.rating | filter: search " class="col s12 m6 wow fadeInUpBig">
+<div ng-repeat="programa in programas | orderBy: programa.rating | filter: search " class="col m12 l6 wow fadeInUpBig">
       <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
              <img class="activator" src="img/{{ programa.tipo }}.jpg">

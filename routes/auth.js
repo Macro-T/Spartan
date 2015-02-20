@@ -4,7 +4,6 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()){
       return next();
     }
-  console.log('Pase por el middleware');
   req.flash('loginMessage', 'You Need To login');
   res.redirect('/login');
 }
@@ -20,11 +19,19 @@ module.exports = function (app, passport) {
     });
 
     // process the login form
-    app.post('/login', passport.authenticate('local-login', {
-        successRedirect : '/', // redirect to the secure profile section
-        failureRedirect : '/login', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
-    }));
+ app.post('/login', function(req, res, next) {
+  passport.authenticate('local-login', function(err, user, info) {
+    if (err) { return next(err); }
+    if (!user) {
+      req.flash('error', 'Usuario '+req.username+' No encontrado');
+      res.json({message: req.flash('loginMessage')});
+    }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.json(user);
+    });
+  })(req, res, next);
+});
 
 
     // show the signup form
@@ -37,9 +44,10 @@ module.exports = function (app, passport) {
     // process the signup form
     app.post('/signup', passport.authenticate('local-signup', {
         successRedirect : '/', // redirect to the secure profile section
-        failureRedirect : '/signup', // redirect back to the signup page if there is an error
+        failureRedirect : '/signup', // redirect back to the signup page if there is an error,
+        successFlash: 'Usuario Creado',
         failureFlash : true // allow flash messages
-    }));
+    }), function(req, res){res.json({ message: req.flash('signupMessage') });});
 
     // process the signup form
     // app.post('/signup', do all our passport stuff here);

@@ -10,7 +10,7 @@ var path = require('path');
 var Programa = require('../models/programs.js');
 
 
-/*router.get('/api/masive', function(req, res){
+router.get('/api/masive', function(req, res){
   Programa.create({
     'nombre' : 'Algun Programa',
     'resumen' : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat maiores dolore voluptatem.',
@@ -24,7 +24,7 @@ var Programa = require('../models/programs.js');
     console.log(done);
     res.redirect('/');
   });
-});*/
+});
 
 
 
@@ -83,15 +83,6 @@ router.get('/api/programas/download/:programaId', function(req, res){
   });
 });
 
-//Middleware for get the Right Category
-function isRightURL (req, res, next) {
-  var rigthURI = req.params.tipo.toString().capitalize();
-  if (rigthURI !== req.params.tipo.toString()) {
-    res.redirect('/api/category/'+rigthURI);
-  }else{
-    next();
-  }
-}
 router.get('/api/category/', function(req, res) {
   Programa.find(function(err, programas) {
         if(err){
@@ -103,19 +94,13 @@ router.get('/api/category/', function(req, res) {
 });
 
 //Get the Category Page
-router.get('/api/category/:tipo', isRightURL, function(req, res) {
+router.get('/api/category/:tipo', function(req, res) {
     Programa.find({tipo: req.params.tipo}, function(err, programas) {
       if(err){
           res.send(err);
           console.log(err);
         }
-        if (programas.length === 0) {
-             programas = { errMessage: 'No se han encontrado Programas' };
-             console.log('Error '+ programas);
-        }else{
-          res.json(programas);
-          console.log('Exito '+ programas);
-        }
+        res.json(programas);
     });
 });
 module.exports = router;

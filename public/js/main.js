@@ -4,17 +4,34 @@
 
   app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
-    //$urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/');
 
     $stateProvider
       .state('home', {
         url:'/',
-        templateUrl: '/templates/main.tpl.html',
-        controller:'HomeCtrl'
+        views:{
+          'main':{
+            templateUrl: '/templates/main.tpl.html',
+            controller:'HomeCtrl'
+          },
+          'modals':{
+            templateUrl: '/templates/modals.tpl.html',
+            controller: 'userController'
+          }
+        }
       })
       .state('category', {
-        url:'/category/',
-        controller:'CategoryCtrl'
+        url:'/category/:cat/',
+         views:{
+          'main':{
+            templateUrl: '/templates/main.tpl.html',
+            controller:'CategoryCtrl'
+          },
+          'modals':{
+            templateUrl: '/templates/modals.tpl.html',
+            controller: 'userController'
+          }
+        }
       });
   });
   app .filter('capitalize', function () {

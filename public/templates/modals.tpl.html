@@ -1,0 +1,50 @@
+<div id="loginModal" class="modal modal-fixed-footer">
+  <h1 ng-hide="registrer" class="center-algin">Accede a Spartan</h1>
+  <h1 ng-show="registrer" class="center-algin">Bienvenido a Spartan</h1>
+  <form class="col s12" ng-submit="processForm()">
+    <div class="container">
+      <div class="modal-content">
+      <h4 class="flow-text red-text center-align" ng-show="message">{{ message.message[0] }}</h4>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="mdi-action-account-circle prefix"></i>
+            <input id="userName" type="text" class="validate" ng-model="username" required name="username">
+            <label for="userName">Nombre de Usuario</label>
+          </div>
+
+          <div class="input-field col s12" ng-show="registrer">
+            <i class="mdi-communication-email prefix"></i>
+            <input id="email" type="email" class="validate" required="{{ registrer }}" name="email" ng-model="email" ng-disabled="!registrer">
+            <label for="email">Correo Electronico</label>
+          </div>
+
+          <div class="input-field col s12">
+            <i class="mdi-action-lock-outline prefix"></i>
+            <input id="userPassword" type="password" class="validate" required ng-model="password" name="password">
+            <label for="userPassword">Contraseña</label>
+          </div>
+
+          <div class="input-field col s12" ng-show="registrer">
+            <i class="mdi-action-lock-outline prefix"></i>
+            <input id="repeatPassword" type="password" class="validate" required="{{ registrer }}" name="repeatPassword" ng-model="repeatPassword" ng-disabled="!registrer">
+            <label for="repeatPassword">Repite la Contraseña</label>
+          </div>
+        </div>
+        </div>
+
+        <div class="modal-footer">
+          <div class="row">
+            <div class="col m12 l6">
+              <a href="#" class="btn waves-effect waves-red red btn-large btn-block" ng-hide="registrer" ng-click="registrer=!registrer"><i class="mdi-action-account-child left"></i> Registrate</a>
+              <a href="#" class="btn waves-effect waves-red red btn-large btn-block" ng-show="registrer" ng-click="registrer=!registrer"><i class="mdi-action-account-child left"></i> Acceder</a>
+            </div>
+            <div class="col m12 l6">
+              <button class="btn waves-effect waves-blue indigo btn-large btn-block" type="submit" ng-hide="registrer">Acceder<i class="mdi-content-send right"></i>
+              </button>
+              <button class="btn waves-effect waves-blue indigo btn-large btn-block" type="submit" ng-show="registrer">Registrame<i class="mdi-content-send right"></i>
+              </button>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>

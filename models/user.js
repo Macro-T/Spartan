@@ -6,14 +6,8 @@ var bcrypt   = require('bcrypt-nodejs');
 // define the schema for our user model
 var userSchema = new Schema({
     local: {
-        email : String,
-        password : String,
-    },
-    data:{
-        nombre: String,
-        bio: String,
-        celular: Number,
-        adim: Boolean
+        username: String,
+        password : String
     }
 });
 

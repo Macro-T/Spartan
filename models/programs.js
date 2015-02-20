@@ -10,8 +10,8 @@ var programaSchema = new Schema({
   fecha: {type: Date, default: Date.now()},
   rating: {type: Number},
   tipo: {type: String, enum: [
-      'Sistema Operativo', 'Crack', 'IDE', 'Seguridad', 'Diseno', 'Utilidades', 'Documento', 'Otros'
-    ], default: 'Otros'}
+      'os', 'crack', 'ide', 'seguridad', 'diseno', 'utilidades', 'documento', 'otros'
+    ], default: 'otros'}
 
 });
 
