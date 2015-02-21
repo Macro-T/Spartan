@@ -1,5 +1,30 @@
 (function() {
     'use strict';
+  function getUser($http) {
+    var userData = {};
+    userData.local = {};
+    var isLogedIn = false;
+    console.log('Me llamaron?');
+    $http.get('/admin')
+        .success(function(data){
+          if (data.user) {
+            isLogedIn = true;
+            userData = data.user;
+            return userData;
+
+          }else if(data.message){
+            isLogedIn = false;
+            userData.local.username = 'Login';
+           return userData.local.username;
+          }
+        })
+        .error(function(err){
+          console.log(err);
+          isLogedIn = false;
+          userData.local.username = 'Login';
+           return userData.local.username;
+        });
+  }
     var controllers = angular.module('appControllers', []);
 
     function HomeCtrl($scope, $http, $timeout) {
@@ -90,6 +115,7 @@
     }
 
     function userController($scope, $http) {
+      console.log(navbarCtrl.getUser);
         $scope.registrer = false;
         $scope.processForm = function() {
             var param = {};
@@ -104,10 +130,8 @@
                 $http.post('/login', param)
                     .success(function(data) {
                         $scope.message = data;
-                        console.log(data);
                         if (!data.message) {
                             $('#loginModal').closeModal();
-                            navbarCtrl($scope, $http);
                         }
                     })
                     .error(function(err) {
@@ -160,23 +184,7 @@
     function navbarCtrl($scope, $http) {
       $scope.userData = {};
       $scope.userData.local = {};
-      (function() {
-              $http.get('/admin')
-                  .success(function(data){
-                    if (data.user) {
-                      $scope.userData = data.user;
-                      $scope.isLogedIn = true;
-                    }else if(data.message){
-                      $scope.userData.local.username = 'Login';
-                      $scope.isLogedIn = false;
-                    }
-                  })
-                  .error(function(err){
-                    console.log(err);
-                    $scope.userData.local.username = 'Login';
-                    $scope.isLogedIn = false;
-                  });
-            })();
+      $scope.userData = getUser($http);
     }
 
     controllers
