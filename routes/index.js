@@ -17,7 +17,7 @@ router.get('/api/masive', function(req, res){
     'url' : '\\programs\\1.txt',
     'descripcion' : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore harum quasi numquam eaque blanditiis ex earum aliquid, accusantium placeat iste recusandae laboriosam voluptatibus culpa, quas!',
     'rating' : 0,
-    'tipo' : 'IDE',
+    'tipo' : 'documento',
     'fecha' : 'Mon Feb 09 2015 19:35:56 GMT-0400 (Hora estándar oeste, Sudamérica)'
   }, function(err, done){
     if (err) {console.log(err);}
@@ -36,6 +36,9 @@ router.get('/api/programas', function(req, res) {
           res.send(err);
           console.log(err);
         }
+        programas.user = [];
+        programas.user.push(req.user);
+        console.log(programas);
         res.json(programas);
   });
 });
@@ -43,6 +46,8 @@ router.get('/api/programas', function(req, res) {
 router.get('/api/programa/:programaId', function(req, res){
   Programa.findById(req.params.programaId, function(err, programa){
     if(err){res.send(err); console.log(err);}
+    programa.user = [];
+    programa.user.push(req.user);
     res.json(programa);
   });
 });
@@ -51,19 +56,24 @@ router.get('/api/programa/:programaId', function(req, res){
 router.delete('/api/programa/:programaId', function(req, res){
   Programa.remove({_id: req.params.programaId}, function(err, programa){
     if(err){res.send(err); console.log(err);}
+    programa.user = [];
+    programa.user.push(req.user);
     console.log(programa);
-    res.json({message: 'Borrado Satisfactoriamente'});
+    res.json(programa);
   });
 });
 
 router.post('/api/programas/:programaId', function(req, res){
   Programa.findByIdAndUpdate(req.params.programaId, req.body.query, function(err, programa){
     if (err) {console.log(err);}
+    console.log('Programa '+ programa.nombre +' Actualizado');
     Programa.find(function(err, programas) {
         if(err){
           res.send(err);
           console.log(err);
         }
+        programas.user = [];
+        programas.user.push(req.user);
         res.json(programas);
   });
   });
@@ -84,14 +94,8 @@ router.get('/api/programas/download/:programaId', function(req, res){
 });
 
 router.get('/api/category/', function(req, res) {
-  Programa.find(function(err, programas) {
-        if(err){
-          res.send(err);
-          console.log(err);
-        }
-        res.json(programas);
+    res.redirect('/api/programas');
   });
-});
 
 //Get the Category Page
 router.get('/api/category/:tipo', function(req, res) {
@@ -100,6 +104,8 @@ router.get('/api/category/:tipo', function(req, res) {
           res.send(err);
           console.log(err);
         }
+        programas.user = [];
+        programas.user.push(req.user);
         res.json(programas);
     });
 });

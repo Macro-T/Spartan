@@ -1,30 +1,5 @@
 (function() {
     'use strict';
-  function getUser($http) {
-    var userData = {};
-    userData.local = {};
-    var isLogedIn = false;
-    console.log('Me llamaron?');
-    $http.get('/admin')
-        .success(function(data){
-          if (data.user) {
-            isLogedIn = true;
-            userData = data.user;
-            return userData;
-
-          }else if(data.message){
-            isLogedIn = false;
-            userData.local.username = 'Login';
-           return userData.local.username;
-          }
-        })
-        .error(function(err){
-          console.log(err);
-          isLogedIn = false;
-          userData.local.username = 'Login';
-           return userData.local.username;
-        });
-  }
     var controllers = angular.module('appControllers', []);
 
     function HomeCtrl($scope, $http, $timeout) {
@@ -115,7 +90,25 @@
     }
 
     function userController($scope, $http) {
-      console.log(navbarCtrl.getUser);
+
+        function userGet(){
+          $http.get('/admin')
+                  .success(function(data){
+                    console.log(data);
+                    if (!data.message) {
+                      $scope.user = data.user.local.username;
+                    }else{
+                      $scope.user = 'Login';
+                    }
+                  })
+                  .error(function(err){
+                    console.log('Error > '+err);
+                    $scope.user = 'Login';
+                  });
+        }
+
+        userGet();
+
         $scope.registrer = false;
         $scope.processForm = function() {
             var param = {};
@@ -132,6 +125,8 @@
                         $scope.message = data;
                         if (!data.message) {
                             $('#loginModal').closeModal();
+                            console.log(data.local.username);
+                            $scope.username = data.local.username;
                         }
                     })
                     .error(function(err) {
@@ -159,39 +154,12 @@
                 }
             }
         };
-
-        $scope.singUp = function() {
-            if ($scope.password !== $scope.repeatPassword) {
-                $scope.message = {
-                    message: ['Contraseñas no Coinciden']
-                };
-            } else {
-                var param = {
-                    email: $scope.email,
-                    password: $scope.password
-                };
-                $http.post('/signup', param)
-                    .success(function(data) {
-                        console.log('Done ' + data);
-                    })
-                    .error(function(err) {
-                        console.log('Error ' + err);
-                    });
-            }
-        };
     }
 
-    function navbarCtrl($scope, $http) {
-      $scope.userData = {};
-      $scope.userData.local = {};
-      $scope.userData = getUser($http);
-    }
-
-    controllers
-        .controller('HomeCtrl', HomeCtrl)
-        .controller('CategoryCtrl', CategoryCtrl)
-        .controller('userController', userController)
-        .controller('navbarCtrl', navbarCtrl);
+controllers
+    .controller('HomeCtrl', HomeCtrl)
+    .controller('CategoryCtrl', CategoryCtrl)
+    .controller('userController', userController);
 })();
 
 //https://scotch.io/bar-talk/ideas-and-demos-for-animating-article-headers-on-scroll

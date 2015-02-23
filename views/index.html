@@ -14,22 +14,22 @@
 
   </head>
   <body ng-app="SpartanD">
-    <header ng-controller="navbarCtrl">
+    <header ng-controller="userController">
       <div class="navbar-fixed">
         <ul id="cat-dropdown" class="dropdown-content">
-          <li><a ui-sref="category({cat: 'Os'})">OS</a></li>
-          <li><a ui-sref="category({cat: 'Crack'})">Crack</a></li>
+          <li><a ui-sref="category({cat: 'os'})">OS</a></li>
+          <li><a ui-sref="category({cat: 'crack'})">Crack</a></li>
           <li class="divider"></li>
-          <li><a ui-sref="category({cat: 'Ide'})">IDE</a></li>
-          <li><a ui-sref="category({cat: 'Seguridad'})">Seguridad</a></li>
-          <li><a ui-sref="category({cat: 'Diseno'})">Diseño</a></li>
+          <li><a ui-sref="category({cat: 'ide'})">IDE</a></li>
+          <li><a ui-sref="category({cat: 'seguridad'})">Seguridad</a></li>
+          <li><a ui-sref="category({cat: 'diseno'})">Diseño</a></li>
           <li class="divider"></li>
-          <li><a ui-sref="category({cat: 'Documento'})">Documentos</a></li>
-          <li><a ui-sref="category({cat: 'Utilidades'})">Utilidades</a></li>
-          <li><a ui-sref="category({cat: 'Otros'})">Otros</a></li>
+          <li><a ui-sref="category({cat: 'documento'})">Documentos</a></li>
+          <li><a ui-sref="category({cat: 'utilidades'})">Utilidades</a></li>
+          <li><a ui-sref="category({cat: 'otros'})">Otros</a></li>
         </ul>
         <ul id="action-dropdown" class="dropdown-content">
-            <li><a ui-serf="user({profile: userData.local.username})">Mi Perfil</a></li>
+            <li><a ui-serf="user({profile: userData.local.username})">Mi Perfil <i class="mdi-social-person right tiny"></i></a></li>
             <li><a href="#" ng-click="logOut">Salir</a></li>
         </ul>
          <nav>
@@ -42,7 +42,7 @@
                <!-- Dropdown Trigger -->
                 <li><a class="dropdown-button" href="#" data-activates="cat-dropdown">Categorias<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
                <li ng-hide="isLogedIn"><a href="#loginModal" class="modal-trigger">
-                  <i class="mdi-action-account-circle right"></i>{{ userData.local.username }}
+                  <i class="mdi-action-account-circle right"></i>{{ user }}
               </a></li>
               <li ng-show="isLogedIn"><a class="dropdown-trigger" href="#" data-activates="action-dropdown">
                   <i class="mdi-navigation-arrow-drop-down right"></i>Hola, {{ userData.local.username }}
