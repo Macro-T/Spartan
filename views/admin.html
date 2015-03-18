@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html ng-app="main.SpartanD">
+<html ng-app="secure.SpartanD">
   <head>
     <base href="/">
-    <title>{{ title | capitalize}}</title>
+    <title>ADMIN - {{ title | capitalize}}</title>
     <!-- <title>Spartan Downloader</title> -->
     <!-- bower:css -->
     <link rel="stylesheet" href="./vendor/materialize/bin/materialize.css" />
@@ -27,21 +27,20 @@
             <li><a href="#" ng-click="logOut">Salir</a></li>
         </ul>
          <nav>
-            <div class="nav-wrapper indigo darken-1">
+            <div class="nav-wrapper red darken-1">
               <div class="col s12">
                 <a ui-sref="home" class="brand-logo">Spartan</a>
                 <ul id="navigation" class="right side-nav">
                 <li><input id="searchInput" type="search" ng-model="search.nombre" class="validate" placeholder="Buscar...">
                 </li>
                <!-- Dropdown Trigger -->
-                <li>
-                    <a class="dropdown-button" href="#" data-activates="cat-dropdown">{{ selectedCategory | capitalize }}<i class="mdi-navigation-arrow-drop-down right"></i>
-                    </a>
-                </li>
-               <li>
-                    <a ui-sref="login" class="modal-trigger"><i class="mdi-action-account-circle right"></i>{{ user || Login }}
-                  </a>
-                </li>
+                <li><a class="dropdown-button" href="#" data-activates="cat-dropdown">{{ selectedCategory | capitalize }}<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+               <li ng-hide="isLogedIn"><a href="#loginModal" class="modal-trigger">
+                  <i class="mdi-action-account-circle right"></i>{{ user }}
+              </a></li>
+              <li ng-show="isLogedIn"><a class="dropdown-trigger" href="#" data-activates="action-dropdown">
+                  <i class="mdi-navigation-arrow-drop-down right"></i>Hola, {{ userData.local.username }}
+              </a></li>
                 </ul>
               </div>
                <a class="button-collapse" href="#" data-activates="navigation"><i class="mdi-navigation-menu"></i></a>
@@ -52,11 +51,7 @@
   <main>
     <div class="container">
       <div class="row wow" ui-view="main">
-        <div class="loader">
-          <svg class="loader--inner" height="100" width="100">
-            <circle cx="50" cy="50" r="42" stroke-width="5" />
-          </svg>
-        </div>
+        Cargando...
       </div>
     </div>
   </main>
@@ -93,9 +88,9 @@
     <script src="./vendor/angular-animate/angular-animate.js"></script>
     <!-- endbower -->
     <!-- inject:js -->
-    <script src="js/main/appControllers.js"></script>
-    <script src="js/main/appServices.js"></script>
-    <script src="js/main/main.js"></script>
+    <script src="js/secure/appControllers.js"></script>
+    <script src="js/secure/appServices.js"></script>
+    <script src="js/secure/main.js"></script>
     <script src="js/scripts.js"></script>
     <!-- endinject -->
   </body>

@@ -5,21 +5,22 @@ function isLoggedIn(req, res, next) {
       return next();
     }
   req.flash('loginMessage', 'You Need To login');
-  res.redirect('/login');
+  res.redirect('/secure/login');
 }
 
 module.exports = function (app, passport) {
-    app.get('/admin', isLoggedIn, function(req, res) {
+
+    app.get('/secure/admin', isLoggedIn, function(req, res) {
         res.json({user : req.user });
     });
 
     // show the login form
-    app.get('/login', function(req, res) {
+    app.get('/secure/login', function(req, res) {
         res.json({message: req.flash('loginMessage')});
     });
 
     // process the login form
- app.post('/login', function(req, res, next) {
+ app.post('/secure/login', function(req, res, next) {
   passport.authenticate('local-login', function(err, user, info) {
     if (err) { return next(err); }
     if (!user) {
@@ -35,14 +36,14 @@ module.exports = function (app, passport) {
 
 
     // show the signup form
-    app.get('/signup', function(req, res) {
+    app.get('/secure/signup', function(req, res) {
 
         // pass in any flash data if it exists
         res.json({ message: req.flash('signupMessage') });
     });
 
     // process the signup form
-    app.post('/signup', passport.authenticate('local-signup', {
+    app.post('/secure/signup', passport.authenticate('local-signup', {
         successRedirect : '/', // redirect to the secure profile section
         failureRedirect : '/signup', // redirect back to the signup page if there is an error,
         successFlash: 'Usuario Creado',
@@ -55,7 +56,7 @@ module.exports = function (app, passport) {
     // =====================================
     // LOGOUT ==============================
     // =====================================
-    app.get('/logout', function(req, res) {
+    app.get('/secure/logout', function(req, res) {
         req.logout();
         res.redirect('/');
     });

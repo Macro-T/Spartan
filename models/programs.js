@@ -15,6 +15,10 @@ var programaSchema = new Schema({
 
 });
 
+programaSchema.method.generateURL = function(fileName){
+  return '\\programs\\' + fileName;
+};
+
 var Programa = mongoose.model('Programa', programaSchema);
 
 module.exports =  Programa;

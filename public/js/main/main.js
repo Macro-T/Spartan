@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  var app = angular.module('SpartanD', ['ui.router', 'appControllers']);
+  var app = angular.module('main.SpartanD', ['ui.router', 'main.appControllers']);
 
   app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
@@ -17,11 +17,11 @@
           'modals':{
             templateUrl: '/templates/modals.tpl.html',
             controller: 'userController'
-          }
+          },
         }
       })
       .state('category', {
-        url:'/category/:cat/',
+        url:'/category/:cat',
          views:{
           'main':{
             templateUrl: '/templates/main.tpl.html',
@@ -30,7 +30,7 @@
           'modals':{
             templateUrl: '/templates/modals.tpl.html',
             controller: 'userController'
-          }
+          },
         }
       });
   });
@@ -58,5 +58,41 @@
       }
     };
   });
+app.run(['$rootScope', function($rootScope){
+$rootScope.categorialst = [
+  {
+    cat: 'os',
+    nombre: 'OS'
+  },
+  {
+    cat: 'crack',
+    nombre: 'Crack'
+  },
+  {
+    cat: 'ide',
+    nombre: 'IDE'
+  },
+  {
+    cat: 'seguridad',
+    nombre: 'Seguridad'
+  },
+  {
+    cat: 'diseno',
+    nombre: 'Diseño'
+  },
+  {
+    cat: 'documento',
+    nombre: 'Documentos'
+  },
+  {
+    cat: 'utilidades',
+    nombre: 'Utilidades'
+  },
+  {
+    cat: 'otros',
+    nombre: 'Otros'
+  }
+];
+}]);
 }
 )();
