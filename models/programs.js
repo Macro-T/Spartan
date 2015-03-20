@@ -15,7 +15,7 @@ var programaSchema = new Schema({
 
 });
 
-programaSchema.method.generateURL = function(fileName){
+programaSchema.methods.generateURL = function(fileName){
   return '\\programs\\' + fileName;
 };
 

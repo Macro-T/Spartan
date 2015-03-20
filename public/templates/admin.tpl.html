@@ -10,7 +10,7 @@
             <span class="card-title activator grey-text text-darken-4">{{ programa.nombre | limitTo: 16 | capitalize:first}}<i class="mdi-hardware-keyboard-arrow-up right"></i>
             </span>
             <p>
-            <a ng-show="User" class="green-text waves-effect waves-light btn-flat btn-large left" ng-click="editProgram(programa._id)"><i class="mdi-file-cloud-download right"></i> Editar</a>
+            <a class="green-text waves-effect waves-light btn-flat btn-large left" ng-click="editProgram(programa._id)"><i class="mdi-file-cloud-download right"></i> Editar</a>
               <a href="/api/programas/download/{{ programa._id }}"  target="_blank" class="red darken-2 white-text waves-effect waves-light btn-large right" ng-click="upRatting(programa._id)"><i class="mdi-file-cloud-download right"></i> Descargar</a>
             </p>
           </div>
@@ -24,20 +24,9 @@
                 <div class="divider"></div>
                 <p><strong><i class="mdi-action-star-rate"></i> {{ programa.rating }} Descargas</strong></p>
                 <div class="divider"></div>
-                <p><a href="/api/programas/download/{{ programa._id }}"  target="_blank" class="red darken-2 white-text waves-effect waves-light btn-large btn-block" ng-click="upRatting(programa._id)"><i class="mdi-file-cloud-download right"></i> Descargar</a></p>
+                <p><a href="/api/programas/download/{{ programa._id }}"  target="_blank" class="red darken-2 white-text waves-effect waves-light btn-large" ng-click="upRatting(programa._id)"><i class="mdi-file-cloud-download right"></i> Descargar</a></p>
             </div >
           </div>
     </div>
 </div>
 
-<div id="adm-actions" class="fixed-action-btn" style="bottom: 45px; right: 24px;" ng-show="User">
-  <a class="btn-floating btn-large red">
-   <i class="large mdi-editor-mode-edit"></i>
-  </a>
-  <ul>
-      <li><a class="btn-floating red" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px); opacity: 0;"><i class="large mdi-editor-insert-chart"></i></a></li>
-      <li><a class="btn-floating yellow darken-1" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px); opacity: 0;"><i class="large mdi-editor-format-quote"></i></a></li>
-      <li><a class="btn-floating green" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px); opacity: 0;"><i class="large mdi-editor-publish"></i></a></li>
-      <li><a class="btn-floating blue" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px); opacity: 0;"><i class="large mdi-editor-attach-file"></i></a></li>
-  </ul>
-</div>

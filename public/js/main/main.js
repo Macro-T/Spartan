@@ -13,11 +13,7 @@
           'main':{
             templateUrl: '/templates/main.tpl.html',
             controller:'HomeCtrl'
-          },
-          'modals':{
-            templateUrl: '/templates/modals.tpl.html',
-            controller: 'userController'
-          },
+          }
         }
       })
       .state('category', {
@@ -26,15 +22,27 @@
           'main':{
             templateUrl: '/templates/main.tpl.html',
             controller:'CategoryCtrl'
-          },
-          'modals':{
-            templateUrl: '/templates/modals.tpl.html',
-            controller: 'userController'
-          },
+          }
         }
+      }).state('login',{
+          url : '/login',
+          views: {
+            'main':{
+              templateUrl : 'templates/login.tpl.html',
+              controller: 'userController'
+            }
+          }
+      }).state('admin',{
+          url : '/admin',
+          views: {
+            'main':{
+              templateUrl : 'templates/admin.tpl.html',
+              controller: 'adminController'
+            }
+          }
       });
   });
-  app .filter('capitalize', function () {
+  app.filter('capitalize', function () {
     return function (input, format) {
       if (!input) {
         return input;
@@ -58,41 +66,30 @@
       }
     };
   });
-app.run(['$rootScope', function($rootScope){
-$rootScope.categorialst = [
-  {
-    cat: 'os',
-    nombre: 'OS'
-  },
-  {
-    cat: 'crack',
-    nombre: 'Crack'
-  },
-  {
-    cat: 'ide',
-    nombre: 'IDE'
-  },
-  {
-    cat: 'seguridad',
-    nombre: 'Seguridad'
-  },
-  {
-    cat: 'diseno',
-    nombre: 'Diseño'
-  },
-  {
-    cat: 'documento',
-    nombre: 'Documentos'
-  },
-  {
-    cat: 'utilidades',
-    nombre: 'Utilidades'
-  },
-  {
-    cat: 'otros',
-    nombre: 'Otros'
-  }
-];
+
+function getUser($http){
+
+}
+app.run(['$rootScope', '$http', function($rootScope, $http){
+  $rootScope.categorialst = [
+    {cat: 'os', nombre: 'OS'},
+    {cat: 'crack', nombre: 'Crack'},
+    {cat: 'ide', nombre: 'IDE'},
+    {cat: 'seguridad', nombre: 'Seguridad'},
+    {cat: 'diseno', nombre: 'Diseño'},
+    {cat: 'documento', nombre: 'Documentos'},
+    {cat: 'utilidades', nombre: 'Utilidades'},
+    {cat: 'otros', nombre: 'Otros'} ];
+
+    $http.get('/api/secure/admin')
+    .success(function(data){
+      if (!data.message) {
+        console.log('Encontre al Usuario Logeado');
+        console.log(data.user);
+        $rootScope.User = data.user;
+      }
+    }).error(function(err){console.error('Error > '+err); });
+
 }]);
 }
 )();

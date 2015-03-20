@@ -19,15 +19,42 @@ router.get('/api/programas/list-dir', function(req, res) {
       walker = walk.walk(folder, {followLinks: true});
 
     walker.on('file', function (root, fileStats, next) {
-        result.push(path.join(path.relative(path.join(__dirname, '../public/programs'), root), fileStats.name));
-        next();
+        var currentFile = path.join(path.relative(path.join(__dirname, '../public/programs'), root), fileStats.name);
+
+        Programa.findOne({url: '\\programs\\' + currentFile}, function(error, archivo){
+          if (error) {console.error(error);}
+
+          if(archivo){
+            console.log(archivo.nombre, 'Encontrado en la DB');
+            next();
+          }else{
+
+            var newPrograma = new Programa();
+
+              newPrograma.nombre = fileStats.name;
+              newPrograma.resumen = 'Nuevo programa"' + fileStats.name + '" añadido hoy';
+              newPrograma.url = newPrograma.generateURL(currentFile);
+              newPrograma.fecha = new Date().toJSON();
+              newPrograma.rating = 0;
+              newPrograma.tipo = 'otros';
+              console.log('El programa: ', newPrograma);
+
+            newPrograma.save(function(err){
+              if (err) {console.error(err);}
+              result.push(newPrograma);
+              console.log(newPrograma.nombre, 'Añadido');
+            });
+
+            next();
+          }
+        });
     });
 
     walker.on('directory', function (root, dirStatsArray, next) {
-
       next();
     });
     walker.on('errors', function (root, nodeStatsArray, next) {
+      console.error('Error de tipo: ', nodeStatsArray, + 'en el sitio:" '+ root + '".');
       next();
     });
 
@@ -39,7 +66,7 @@ router.get('/api/programas/list-dir', function(req, res) {
 }
 );
 
-// Wonderful route that give a 1.txt file for making proofs
+// Wonderful route that give a 1.txt file for making *.*.*
 
 /*
 router.get('/api/masive', function(req, res){
@@ -63,7 +90,7 @@ router.get('/api/programas', function(req, res) {
   Programa.find(function(err, programas) {
         if(err){
           res.send(err);
-          console.log(err);
+          console.error(err);
         }
         programas.user = [];
         programas.user.push(req.user);
@@ -75,7 +102,7 @@ router.get('/api/programas', function(req, res) {
 
 router.get('/api/programas/:programaId', function(req, res){
   Programa.findById(req.params.programaId, function(err, programa){
-    if(err){res.send(err); console.log(err);}
+    if(err){res.send(err); console.error(err);}
     programa.user = [];
     programa.user.push(req.user);
     res.json(programa);
@@ -102,12 +129,12 @@ router.post('/api/programas', function(req, res){
 
 router.put('/api/programas/:programaId', function(req, res){
   Programa.findByIdAndUpdate(req.params.programaId, req.body.query, function(err, programa){
-    if (err) {console.log(err);}
+    if (err) {console.error(err);}
     console.log('Programa '+ programa.nombre +' Actualizado');
     Programa.find(function(err, programas) {
         if(err){
           res.send(err);
-          console.log(err);
+          console.error(err);
         }
         programas.user = [];
         programas.user.push(req.user);
@@ -120,7 +147,7 @@ router.put('/api/programas/:programaId', function(req, res){
 
 router.delete('/api/programas/:programaId', function(req, res){
   Programa.remove({_id: req.params.programaId}, function(err, programa){
-    if(err){res.send(err); console.log(err);}
+    if(err){res.send(err); console.error(err);}
     programa.user = [];
     programa.user.push(req.user);
     res.json(programa);
@@ -139,7 +166,7 @@ router.get('/api/programas/categoria/:tipo', function(req, res) {
     Programa.find({tipo: req.params.tipo}, function(err, programas) {
       if(err){
           res.send(err);
-          console.log(err);
+          console.error(err);
         }
         programas.user = [];
         programas.user.push(req.user);
@@ -151,7 +178,7 @@ router.get('/api/programas/categoria/:tipo', function(req, res) {
 
 router.get('/api/programas/download/:programaId', function(req, res){
   Programa.findById(req.params.programaId, function(err, programa){
-    if (err) {res.json(err);console.log('Programa no encontrado: '+ err); return;}
+    if (err) {res.json(err);console.error('Programa no encontrado: '+ err); return;}
     var file = path.join(__dirname, '../public', programa.url);
     res.download(file, path.basename(file), function(err){
       if (err) {console.log('Error en Descarga: ' + err); res.json(err);}

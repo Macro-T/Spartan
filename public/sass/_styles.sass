@@ -1,7 +1,12 @@
-.card
-  @include selection
-    background-color: #e57373
-    color: #212121
+.ng-enter, .ng-move
+  @include animation(fadeInUpBig 1s ease)
+
+.ng-leave
+  @include animation(fadeOutDownBig 1s ease)
+
+@include selection
+  background-color: #e57373
+  color: #212121
 
 .nav-wrapper
   overflow: hidden
@@ -15,6 +20,8 @@
     font-size: 1.3rem
     & p>a.btn-large
       font-size: rem(16)
+  .btn, .btn-flat, .btn-block, .btn-flat
+    display: block !important
 
 .btn i, .btn-large i, .btn-floating i, .btn-large i, .btn-flat i
   vertical-align: middle!important
@@ -31,6 +38,19 @@
     vertical-align: middle
 #searchInput
   color: darken(#7986cb, 5)
-  @media only screen and (min-width: 601px)
-    color:white
 
+  @media only screen and (min-width: 601px)
+    color: white
+.contenedor.code::-webkit-scrollbar
+  width: 1rem
+  background-color: #323232
+  border-radius: 2px
+
+::-webkit-scrollbar-thumb
+  background-color: #bdc3c7
+
+::-webkit-scrollbar-thumb:hover
+  background-color: #bdc3c7
+
+::-webkit-scrollbar-thumb:active
+  background-color: #bdc3c7

@@ -22,10 +22,6 @@
             <a ui-sref="category({ cat: categoria.cat })">{{ categoria.nombre }}</a>
           </li>
         </ul>
-        <ul id="action-dropdown" class="dropdown-content">
-            <li><a ui-serf="user({profile: userData.local.username})">Mi Perfil <i class="mdi-social-person right tiny"></i></a></li>
-            <li><a href="#" ng-click="logOut">Salir</a></li>
-        </ul>
          <nav>
             <div class="nav-wrapper indigo darken-1">
               <div class="col s12">
@@ -39,7 +35,7 @@
                     </a>
                 </li>
                <li>
-                    <a ui-sref="login" class="modal-trigger"><i class="mdi-action-account-circle right"></i>{{ user || Login }}
+                    <a ui-sref="login"><i class="mdi-action-account-circle right"></i>{{ User || 'Login' }}
                   </a>
                 </li>
                 </ul>
@@ -51,11 +47,13 @@
   </header>
   <main>
     <div class="container">
-      <div class="row wow" ui-view="main">
-        <div class="loader">
-          <svg class="loader--inner" height="100" width="100">
-            <circle cx="50" cy="50" r="42" stroke-width="5" />
-          </svg>
+      <div class="row" ui-view="main">
+        <div class="valign-wrapper center-align">
+            <div class="loader valing">
+              <svg class="loader--inner" height="100" width="100">
+                <circle cx="50" cy="50" r="42" stroke-width="5" />
+              </svg>
+            </div>
         </div>
       </div>
     </div>
@@ -67,7 +65,7 @@
             <h5>Spartan</h5>
             <p class="grey-text text-lighten-2">Un sistema de gestión de Descargas Creado por Estudiantes Entusiastas</p>
             <div class="divider"></div>
-            <h5>Encuentralo en <a href="http://github.com/Macro-T/Spartan" class="red-text text-lighten-3">Giithub</a></h5>
+            <h5>Encuentralo en <a href="http://github.com/Macro-T/Spartan" class="red-text text-lighten-3">Github</a></h5>
           </div>
           <div class="col l4 offset-l2 s12">
             <h5>Desarrolado Por</h5>
@@ -83,7 +81,6 @@
         </div>
       </div>
     </footer>
-   <div ui-view="modals"></div>
     <!-- bower:js -->
     <script src="./vendor/jquery/dist/jquery.js"></script>
     <script src="./vendor/angular/angular.js"></script>

@@ -8,10 +8,6 @@ var sassConfig = { style: 'expanded', sourcemap: false, 'sourcemap=none': true }
 gulp.task('styles', function(){
  return $.rubySass('./public/sass/', sassConfig)
       .on('error', function (err) {  $.notify(err); console.log(err.message);})
-      .pipe($.autoprefixer({
-                browsers: ['last 2 version'],
-                cascade: false
-            }))
       .pipe(gulp.dest('./public/css'));
 });
 

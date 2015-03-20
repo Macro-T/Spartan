@@ -2,9 +2,10 @@
   'use strict';
 
 var servicios = angular.module('main.appServices', ['ngResource']);
-var API = '/api/programas/:id';
 
 function APIService($resource){
+
+  var API = '/api/programas/:id';
 
   var request = $resource(API, {
     id: '@id'
@@ -28,34 +29,27 @@ function APIService($resource){
   });
 
   return request;
+}
 
+function SecurityService($resource){
+  var API = '/api/secure/';
 
-/*
+  var request = $resource(API, {},{
+    logearUser : {
+      url: API + 'login',
+      method: 'PUT',
+      params: {password: '@password', username: '@user'},
+      headers: { 'auth-token': 'C3PO R2D2' },
+      isArray: false
+    }
+  });
 
- var MyResource = $resource('/api/:action/:query',{
-        query:'@query'
-    }, {
-        search: {
-            method: 'GET',
-            params: {
-                action: "search",
-                query: '@query'
-            }
-        }
-    });
-    return MyResource;
-
-*/
+  return request;
 
 }
 
-function getCategory($http){
-
-  return $http.get(API);
-
-}
 servicios
   .factory('APIService', ['$resource', APIService])
-  .factory('getCategory', ['$resource', getCategory]);
+  .factory('SecurityService', ['$resource', SecurityService]);
 
 })();
